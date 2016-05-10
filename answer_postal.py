@@ -290,11 +290,11 @@ class PostalAnswer(ans.Answer):
                         maxp = con['probability']
                         country = con['item']       
         if parseCountry(country)=='gb':
-            return 'postcode', ''
+            return 'postcode', '', 9
         if parseCountry(country)=='us':
-            return 'zipcode', ''
+            return 'zipcode', '', 9
 
-        return 'None', 'None' #we can't ask this yet.
+        return 'None', 'None',0 #we can't ask this yet.
 
 
     @classmethod

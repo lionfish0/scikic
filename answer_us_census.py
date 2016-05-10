@@ -407,7 +407,7 @@ class USCensusAnswer(ans.Answer):
 
     @classmethod
     def pick_question(self,questions_asked,facts,target):
-	    return 'None','agegender'
+	    return 'None','agegender',0
 
 
     @classmethod

@@ -110,7 +110,7 @@ def do_inference(data):
             if cl.dataset not in datasets:
                 continue
         cl.init_db() #(normally should be started from an instance, but we don't really mind).
-        dataitem, detail = cl.pick_question(questions_asked,facts,'')
+        dataitem, detail,rating = cl.pick_question(questions_asked,facts,'')
         dataset = cl.dataset
         if (dataitem=='None'):
             item = {'dataset':dataset, 'dataitem':dataitem, 'detail':detail, 'answer':0} #no answer provided to this type of dataset
@@ -220,33 +220,37 @@ def pick_question(data):
         questions_only_asked.append(questionstring) #this doesn't include the answer so we can look for if we've asked the question already.
 
     found = False           #have we found a question?
+    results = []
+    top_result = (0,0,0)
+    best_rating = 0
     for counter in range(200): #skip though everything until we find one...
-#        c = [cls for cls in ans.Answer.__subclasses__() if cls.dataset not in ['personality']] 
-        c = [cls for cls in ans.Answer.__subclasses__()]
-        cl = random.choice(c)
-  #      print cl.dataset + "<br/>"
-#        if (cl.dataset=='movielens' or cl.dataset=='personality'):
-#            if random.random()<0.9: #discourage movielens questions, as they're of less use
-#                continue
-        cl.init_db() #normally should be started from an instance?? but we don't really mind.
-        dataitem, detail = cl.pick_question(questions_asked,facts,target)
-        dataset = cl.dataset
-        if (dataitem=='None' or dataitem=='Skip'): #not a dataset that needs questions
-            continue;
-        question = "%s_%s_%s" % (dataset, dataitem, detail)
-        if (question in questions_only_asked): #duplicate of one we've already asked
-            continue
-        else:
-            logging.info('    found a question: %s, %s, %s' % (dataset,dataitem,detail))
-            found = True
-            break
+        for cl in ans.Answer.__subclasses__():        
+            cl.init_db()
+            logging.info(cl.dataset)
+            dataitem, detail, rating = cl.pick_question(questions_asked,facts,target)
+            dataset = cl.dataset
+            if (dataitem=='None' or dataitem=='Skip'): #not a dataset that needs questions
+                continue;
+            question = "%s_%s_%s" % (dataset, dataitem, detail)
+            if (question in questions_only_asked): #duplicate of one we've already asked
+                continue
+            else:
+                results.append((dataset, dataitem, detail,rating))
+                if rating>best_rating:
+                    top_result = (dataset, dataitem, detail,rating)
+                    best_rating = rating
+                    logging.info(top_result)
 
-    if not found:
+    if len(results)==0:
         logging.info('    not found a question')
         dataset = None
         dataitem = None
         detail = None
     logging.info('    returning (%s)' % dataset)
+    
+    dataset = top_result[0]
+    dataitem = top_result[1]
+    detail = top_result[2]
     return {'question':{'dataset':dataset, 'dataitem':dataitem, 'detail':detail},'facts':facts}
 
 def get_question_string(data):

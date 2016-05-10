@@ -56,11 +56,11 @@ class DemographicAnswer(ans.Answer):
         if ('gender' in facts):
             if not 'factor_gender' in features: #TODO: We need to overwrite factor_gender with this more certain distribution
                 ratio = [0.5,0.5] #prior...
-                if facts['gender']=='Male':
+                if facts['gender'].lower()=='male':
                     ratio = [1.0,0]
-                if facts['gender']=='Female':
+                if facts['gender'].lower()=='female':
                     ratio = [0,1.0]               
-                if facts['gender']=='Other':
+                if facts['gender'].lower()=='other':
                     ratio = [0.5,0.5] #don't know what to do, as the census etc doesn't have data for this situation.
                 features['factor_gender'] = pm.Categorical('factor_gender',np.array(ratio)); #male, female...
       
@@ -70,5 +70,5 @@ class DemographicAnswer(ans.Answer):
     @classmethod
     def pick_question(self,questions_asked,facts,target):
         dataitem = random.choice(['age','gender'])
-        return dataitem,''
+        return dataitem,'',3
 

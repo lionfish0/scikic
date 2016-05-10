@@ -205,7 +205,7 @@ class LikeLocationsAnswer(ans.Answer):
     @classmethod
     def pick_question(self,questions_asked,facts,target):
     	#return 'name', '' #could return None,None in future, depending on if we get name from facebook
-        return 'None', 'None' #None string used to help database
+        return 'None', 'None',0 #None string used to help database
 
     def calc_probs(self):
        pass

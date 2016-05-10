@@ -169,5 +169,5 @@ class MusicAnswer(ans.Answer):
 
     @classmethod
     def pick_question(self,questions_asked,facts,target):
-        return 'favourite_artist','';
+        return 'favourite_artist','',1;
 

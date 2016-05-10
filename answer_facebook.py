@@ -73,4 +73,4 @@ class FacebookAnswer(ans.Answer):
 
     @classmethod
     def pick_question(self,questions_asked,facts,target):
-        return 'Skip', 'None'       #we don't want to ask questions to get this data
+        return 'Skip', 'None',0       #we don't want to ask questions to get this data

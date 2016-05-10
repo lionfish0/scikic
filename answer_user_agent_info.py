@@ -21,7 +21,7 @@ class UserAgentInfoAnswer(ans.Answer):
 
     @classmethod
     def pick_question(self,questions_asked,facts,target):
-        return 'None', 'None'
+        return 'None', 'None',0
 
     def append_facts(self,facts,all_answers):
         try:

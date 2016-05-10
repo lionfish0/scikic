@@ -646,7 +646,7 @@ class UKCensusAnswer(ans.Answer):
  
     @classmethod
     def pick_question(cls,questions_asked,facts,target):
-	    return 'None','agegender'
+	    return 'None','agegender',0
 
 
 

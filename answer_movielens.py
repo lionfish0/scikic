@@ -203,7 +203,7 @@ class MovieAnswer(ans.Answer):
         filmn = random.randint(0,len(films)-1);
         movie_index = films[filmn][0];
         movie_name = films[filmn][1];
-        return 'seen',movie_index
+        return 'seen',movie_index,2
 
     @classmethod
     def metaData(cls):

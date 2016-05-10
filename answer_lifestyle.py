@@ -38,5 +38,5 @@ class LifestyleAnswer(ans.Answer):
     @classmethod
     def pick_question(self,questions_asked,facts,target):
         dataitem = random.choice(['cats','guns','travel','workplace'])
-        return dataitem,''
+        return dataitem,'',1
 

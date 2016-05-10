@@ -155,7 +155,7 @@ class OSMAnswer(ans.Answer):
     @classmethod
     def pick_question(cls,questions_asked,facts,target):
     #Picks a question to ask, using previous questions asked.
-        return 'None','None'
+        return 'None','None',0
         
 
     def insights(self,inference_result,facts):

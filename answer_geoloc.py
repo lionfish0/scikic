@@ -86,7 +86,8 @@ class GeoLocAnswer(ans.Answer):
                         ipwrong = True
                     else:
                         #TODO: CACHE IN DB
-                        return 'nearcity',json.dumps({'city':json_loc['city'],'country':json_loc['country_name']})
+                        logging.info('we might be near %s' % json_loc['city'])
+                        return 'nearcity',json.dumps({'city':json_loc['city'],'country':json_loc['country_name']}),5
                 except Exception: #urllib2.HTTPError: #lots of 
                     ipwrong = True #effectively it's wrong as we can't find out where they are.
                # except urllib2.URLError:#time out?
@@ -98,11 +99,11 @@ class GeoLocAnswer(ans.Answer):
         if ipwrong:
             #ask where they are country then city
             if 'country' not in facts['where'] or len(facts['where']['country'])!=1:
-                return 'country','{}'
+                return 'country','{}',5
             else:
                 if 'city' not in facts['where'] or len(facts['where']['city'])!=1:
-                    return 'city','{}'
-        return 'None','None'
+                    return 'city','{}',1
+        return 'None','None',0
      #   city_details = {}
      #   city_details['latitude'] = 53.383611
      #   city_details['longitude'] = -1.466944
