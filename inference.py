@@ -228,6 +228,7 @@ def pick_question(data):
             cl.init_db()
             logging.info(cl.dataset)
             dataitem, detail, rating = cl.pick_question(questions_asked,facts,target)
+            rating = rating + random.random()*2.0 #add some randomness, better questions still float to the top
             dataset = cl.dataset
             if (dataitem=='None' or dataitem=='Skip'): #not a dataset that needs questions
                 continue;

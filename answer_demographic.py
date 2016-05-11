@@ -70,5 +70,5 @@ class DemographicAnswer(ans.Answer):
     @classmethod
     def pick_question(self,questions_asked,facts,target):
         dataitem = random.choice(['age','gender'])
-        return dataitem,'',3
+        return dataitem,'',1
 
