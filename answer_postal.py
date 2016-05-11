@@ -289,11 +289,6 @@ class PostalAnswer(ans.Answer):
                     if maxp<con['probability']:
                         maxp = con['probability']
                         country = con['item']
-        logging.info('--------------------')
-        logging.info('--------------------')
-        logging.info(country)        
-        logging.info('--------------------')
-        logging.info('--------------------')                        
         if parseCountry(country)=='gb':
             return 'postcode', '', 9
         if parseCountry(country)=='us':
