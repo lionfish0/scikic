@@ -139,10 +139,6 @@ class USCensusAnswer(ans.Answer):
     
         #Get all languages
         bgs = self.get_list_of_bgs(facts)
-	#TODO: Temporary hack to make the next part quick: Ideally we'd multithread this, but instead
-	#we ignore all but the first block group.
-	if len(bgs)>1:
-		bgs = bgs[0:1]
         logging.info('GET ALL LANGUAGES')        
         for bg in bgs: #TODO!!! THIS MAKES NO SENSE! WE'RE ONLY GETTING A RESEULT FOR THE LAST BG!
             logging.info(str(bg))
@@ -292,6 +288,9 @@ class USCensusAnswer(ans.Answer):
         if 'where' in facts:
             if 'uscensus' in facts['where']:
                 bgs = [it['item'] for it in facts['where']['uscensus']] #get the list of OA values
+                #temporary to reduce the number of bgs to just the first 2
+        if len(bgs)>2: 
+                bgs = bgs[0:2]
         return bgs
 
     def get_list_of_bg_probs(self,facts):
@@ -299,10 +298,15 @@ class USCensusAnswer(ans.Answer):
         if 'where' in facts:
             if 'uscensus' in facts['where']:
                 probs = np.array([it['probability'] for it in facts['where']['uscensus']]) #get the list of OA values
+                #temporary to reduce the number of bgs to just the first 2
+        if len(probs)>2: 
+                probs = probs[0:2]
+
         probs = probs/probs.sum() #shouldn't be necessary
         return probs
 
     def calc_probs_age(self,facts):
+        logging.info("Starting to calculate age probs")
         bgs = self.get_list_of_bgs(facts)
         threadData = []
         threads = []
@@ -322,6 +326,7 @@ class USCensusAnswer(ans.Answer):
        
         self.localAgeDists = localAgeDists
         self.nationalAgeDist = nationalAgeDist
+        logging.info("Calculated.")
         
         #we want p(postcode|age), which we assume is equal to p(output area|age)
         #if n = number of people in output area
