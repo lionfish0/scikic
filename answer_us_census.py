@@ -140,9 +140,9 @@ class USCensusAnswer(ans.Answer):
         #Get all languages
         bgs = self.get_list_of_bgs(facts)
 	#TODO: Temporary hack to make the next part quick: Ideally we'd multithread this, but instead
-	#we ignore all but the first 2 block groups.
-	if len(bgs)>2:
-		bgs = bgs[0:2]
+	#we ignore all but the first block group.
+	if len(bgs)>1:
+		bgs = bgs[0:1]
         logging.info('GET ALL LANGUAGES')        
         for bg in bgs: #TODO!!! THIS MAKES NO SENSE! WE'RE ONLY GETTING A RESEULT FOR THE LAST BG!
             logging.info(str(bg))
