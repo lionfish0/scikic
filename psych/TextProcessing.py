@@ -36,13 +36,15 @@ class TextProcessing(object):
         fea : list
             Returns the words and topic frequency.
         """
-        
+    
         words = []
         bi_grams = []
         tri_grams = []
         tok = Tokenizer(preserve_case=False)
-        
-        if isinstance(text,str):
+               
+        # if the input text is a single str or unicode instead of str list
+        # convert it to str list
+        if isinstance(text,basestring):
             text_temp = []
             text_temp.append(text)
             text = text_temp
