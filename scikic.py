@@ -7,6 +7,7 @@ import logging
 from logging import FileHandler
 
 from psych.Extractor import Extractor
+from simple.green import Green
 
 from flask import jsonify
 from flask import request
@@ -155,7 +156,7 @@ def route_question():
 @app.route('/version', methods=['GET','POST'])
 @crossdomain(origin='*')
 def route_version():     
-    return json.dumps({'version':'3.0'})
+    return json.dumps({'version':'8.0'})
       
 @app.route('/metadata', methods=['POST'])
 @crossdomain(origin='*')
@@ -187,6 +188,14 @@ def route_psych():
         return json.dumps({'scores':score, 'percentiles':perc})    
     else:
         raise InvalidAPIUsage('Language not English. Other languages not yet supported.')
-    
+        
+@app.route('/simple/green', methods=['POST'])
+@crossdomain(origin='*')
+def route_simple(): 
+    data = parse_json(request.data)    
+    green = Green()    
+    insight, values = green.getInsight(data)    
+    return json.dumps({'insights':insight, 'values':values})
+
 if __name__ == '__main__':
     app.run(debug=False,host='0.0.0.0', port=4567)
