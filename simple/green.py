@@ -33,7 +33,7 @@ class Green(Simple):
     #Green Home
     energy={'name':'energy','text':'Thinking about your home energy (gas & electricity), are you on a green tariff?','weight': 40, 'answer_scores':[0,0,80,80,100]}
     glazing={'name':'glazing','text':'Do your windows have double-glazing','weight':10, 'answer_scores':[100,0,20]}
-    insulation={'name':'insulation','text':'How good would you consider your wall and floor insulation to be?','weight': 20, 'answer_scores':[100,80,60,20,0,50]}
+    insulation={'name':'insulation','text':'How good would you consider your wall and floor insulation to be?','weight': 20, 'answer_scores':[100,80,60,20,50,50]}
     systems={'name':'systems','text':'Which, if any, of these green energy systems do you have in your home?','weight': 30, 'answer_scores':[80,60,60,60,40,0], 'max_score':100}
     #Shopping behaviour
     energyrating={'name':'energyrating','text':'Is a home appliance\'s energy rating an important consideration at time of purchase?','weight': 30, 'answer_scores':[40,40,60,100,0]}
