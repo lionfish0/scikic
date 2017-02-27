@@ -3,6 +3,8 @@
 Generates an insight reporting on the green credentials of the citizen.
 """
 
+#To do: Allows same answer more than once to same question
+
 import numpy as np
 from simple import Simple
  

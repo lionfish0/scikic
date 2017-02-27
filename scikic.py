@@ -189,7 +189,7 @@ def route_psych():
     else:
         raise InvalidAPIUsage('Language not English. Other languages not yet supported.')
         
-@app.route('/simple/green', methods=['POST'])
+@app.route('/simple/green', methods=['GET','POST'])
 @crossdomain(origin='*')
 def route_simple(): 
     data = parse_json(request.data)    
